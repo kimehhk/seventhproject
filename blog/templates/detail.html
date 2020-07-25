@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block contents %}
+<head>
+   <style>
+         @font-face { 
+            font-family: 'S-CoreDream-3Light'; 
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') 
+            format('woff'); 
+            font-weight: normal; 
+            font-style: normal; 
+        }
+        body {
+            font-family: 'S-CoreDream-3Light';
+            letter-spacing: 1px;
+        }
+        h1 {
+            text-align: center;
+            font-weight: 800;
+        }
+        .box {
+            margin: 10px 100px;
+            padding: 20px 40px;
+            border: gray;
+            border-style: solid;
+            border-radius: 5px;
+            background-color: gainsboro;
+        }
+    </style>
+</head>
+<body>    
+    <br>
+    <h1>자세한 본문 내용</h1>
+    <br>
+    <div class="box">
+        {% csrf_token %}
+        <h2>{{blog.title}}</h2>
+        <br> 
+        {% if blog.image %}
+        <img src="{{blog.image.url}}" height="300">
+        {% endif %}
+        <p>{{blog.pub_date}}</p>
+        <p>{{blog.body}}</p>
+        <a href = "{% url 'update' blog.id %}">수정</a> 
+        <a href = "{% url 'delete' blog.id %}">삭제</a>
+    </div>
+</body>
+{% endblock %}
